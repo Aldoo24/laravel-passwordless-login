@@ -1,7 +1,5 @@
 # Laravel Passwordless Login
 
----
-
 ## A login link generator for Laravel
 
 This package provides a temporary signed route that can be used to login a user. You can implement the login yourself or
