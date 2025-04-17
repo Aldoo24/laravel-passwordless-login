@@ -1,0 +1,50 @@
+{
+    "name": "aldo/laravel-passwordless-login",
+    "description": "Log into your application using just a link",
+    "autoload": {
+        "psr-4": {
+            "Aldo\\LaravelPasswordlessLogin\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "laravel/framework": "^12.8",
+        "orchestra/testbench": "10.x-dev",
+        "nunomaduro/collision": "v8.x-dev"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Aldo\\LaravelPasswordlessLogin\\Providers\\PasswordlessServiceProvider"
+            ],
+            "aliases": {
+                "PasswordlessLogin": "Aldo\\LaravelPasswordlessLogin\\Facades\\PasswordlessLogin"
+            }
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve --ansi"
+        ]
+    }
+}
