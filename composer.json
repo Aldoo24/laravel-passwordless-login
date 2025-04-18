@@ -21,8 +21,10 @@
     },
     "require-dev": {
         "laravel/framework": "^12.8",
-        "orchestra/testbench": "10.x-dev",
-        "nunomaduro/collision": "v8.x-dev"
+        "nunomaduro/collision": "v8.x-dev",
+        "laravel/pint": "^1.22",
+        "phpstan/phpstan": "2.1.x-dev",
+        "orchestra/testbench": "10.x-dev"
     },
     "extra": {
         "laravel": {
@@ -54,6 +56,14 @@
             "Composer\\Config::disableProcessTimeout",
             "@build",
             "@php vendor/bin/testbench serve --ansi"
+        ],
+        "lint": [
+            "@php vendor/bin/pint --ansi",
+            "@php vendor/bin/phpstan analyse --verbose --ansi"
+        ],
+        "test": [
+            "@clear",
+            "@php vendor/bin/phpunit"
         ]
     }
 }

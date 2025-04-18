@@ -38,7 +38,8 @@ class LoginController extends Controller
                     "email" => $request->email,
                     "message" => __("passwordless::app.login.email.email-sent"),
                     "sub_message" => __("passwordless::app.login.email.message"),
-                ]);
+                ])
+                ->setStatusCode(301);
         } catch (\Exception) {
             return back()->with([
                 "status" => false,

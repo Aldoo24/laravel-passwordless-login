@@ -2,6 +2,8 @@
 
 namespace Tests;
 
+use Aldo\LaravelPasswordlessLogin\Facades\PasswordlessLogin;
+use Aldo\LaravelPasswordlessLogin\Providers\PasswordlessServiceProvider;
 use Illuminate\Config\Repository;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,14 +21,14 @@ abstract class TestCase extends BaseTestCase
     protected function getPackageProviders($app): array
     {
         return [
-            'Aldo\LaravelPasswordlessLogin\Providers\PasswordlessServiceProvider'
+            PasswordlessServiceProvider::class,
         ];
     }
 
     protected function getPackageAliases($app): array
     {
         return [
-            'PasswordlessLogin' => 'Aldo\LaravelPasswordlessLogin\Facades\PasswordlessLogin',
+            'PasswordlessLogin' => PasswordlessLogin::class,
         ];
     }
 
@@ -37,20 +39,22 @@ abstract class TestCase extends BaseTestCase
                 'passwordless.model.namespace' => 'Workbench\App\Models\User',
                 'passwordless.url.route' => 'home',
                 'passwordless.routes.flag' => true,
+                'app.env' => 'testing',
                 'session.driver' => 'array',
+                'cache.default' => 'array'
             ]);
         });
     }
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->afterApplicationCreated(function () {
             $this->user = User::create([
                 'name' => 'Aldo',
                 'email' => 'aldo@example.com',
             ]);
         });
-
-        parent::setUp();
     }
 }
