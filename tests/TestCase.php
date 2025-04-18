@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Illuminate\Config\Repository;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as BaseTestCase;
@@ -10,7 +11,7 @@ use Workbench\App\Models\User;
 
 abstract class TestCase extends BaseTestCase
 {
-    use WithWorkbench, RefreshDatabase;
+    use WithWorkbench, InteractsWithViews, RefreshDatabase;
 
     protected $enablesPackageDiscoveries = true;
     protected $user;

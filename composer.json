@@ -1,6 +1,14 @@
 {
     "name": "aldo/laravel-passwordless-login",
     "description": "Log into your application using just a link",
+    "keywords": [
+        "password",
+        "passwordless",
+        "login",
+        "passwordless-login",
+        "laravel-passwordless-login"
+    ],
+    "homepage": "https://github.com/Aldoo24/laravel-passwordless-login.git",
     "autoload": {
         "psr-4": {
             "Aldo\\LaravelPasswordlessLogin\\": "src/"
@@ -8,7 +16,8 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "php": "^8.2"
+        "php": "^8.2",
+        "illuminate/support": "*"
     },
     "require-dev": {
         "laravel/framework": "^12.8",
