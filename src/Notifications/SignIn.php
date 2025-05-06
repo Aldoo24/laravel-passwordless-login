@@ -3,7 +3,6 @@
 namespace Aldo\LaravelPasswordlessLogin\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -15,7 +14,8 @@ class SignIn extends Notification
      * Create a new notification instance.
      */
     public function __construct(public string $signInUrl)
-    {}
+    {
+    }
 
     /**
      * Get the notification's delivery channels.

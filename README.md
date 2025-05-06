@@ -86,18 +86,18 @@ function sendLoginLink()
 
 **If you want to use the provided authentication implementation follow the steps below.**
 
+- Publish the migration files
+
+```bash
+  php artisan vendor:publish --tag=passwordless-migrations
+````
+
 - Run the migrations
 
 ```bash
   php artisan migrate
 ```
 The packages migration modifies the users table making the password column nullable.
-
-If you want to publish the migration files run:
-
-```bash
-  php artisan vendor:publish --tag=passwordless-migrations
-````
 
 - In the config file change the flag to true and set the correct route name for your home page
 

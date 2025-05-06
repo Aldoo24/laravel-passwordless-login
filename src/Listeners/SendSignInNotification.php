@@ -3,8 +3,6 @@
 namespace Aldo\LaravelPasswordlessLogin\Listeners;
 
 use Aldo\LaravelPasswordlessLogin\Notifications\SignIn;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class SendSignInNotification
 {

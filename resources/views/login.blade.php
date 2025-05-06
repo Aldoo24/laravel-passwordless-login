@@ -27,7 +27,9 @@
                         </label>
                         <input type="email" name="email" id="email"
                                class="bg-gray-50 border border-gray-300 @error("email") border-red-500 dark:border-red-500 @enderror text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="@lang("passwordless::app.login.placeholders.email")" required="">
+                               placeholder="@lang("passwordless::app.login.placeholders.email")"
+                               required=""
+                               value="{{ old('email') }}">
                         @error("email")
                         <span class="mt-2 text-sm text-red-500">{{ $message }}</span>
                         @enderror

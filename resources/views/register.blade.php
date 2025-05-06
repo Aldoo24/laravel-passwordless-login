@@ -26,7 +26,10 @@
                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">@lang("passwordless::app.register.labels.name")</label>
                         <input type="text" name="name" id="name"
                                class="bg-gray-50 border border-gray-300 @error("name") border-red-500 dark:border-red-500 @enderror text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="@lang("passwordless::app.register.placeholders.name")" required="">
+                               placeholder="@lang("passwordless::app.register.placeholders.name")"
+                               required=""
+                               value="{{ old('name') }}"
+                        >
                         @error("name")
                         <span class="mt-2 text-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -36,7 +39,10 @@
                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">@lang("passwordless::app.register.labels.email")</label>
                         <input type="email" name="email" id="email"
                                class="bg-gray-50 border border-gray-300 @error("email") border-red-500 dark:border-red-500 @enderror text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="@lang("passwordless::app.register.placeholders.email")" required="">
+                               placeholder="@lang("passwordless::app.register.placeholders.email")"
+                               required=""
+                               value="{{ old('name') }}"
+                        >
                         @error("email")
                         <span class="mt-2 text-sm text-red-500">{{ $message }}</span>
                         @enderror

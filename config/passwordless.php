@@ -6,8 +6,8 @@ return [
     | The namespace of your applications user model
     |
     */
-    "model" => [
-        "namespace" => "\App\Models\User",
+    'model' => [
+        'namespace' => "\App\Models\User",
     ],
 
     /*
@@ -15,9 +15,9 @@ return [
     | The route name and the url expiration in minutes
     |
     */
-    "url" => [
-        "route" => "login.verify",
-        "expire" => 5,
+    'url' => [
+        'route' => 'login.verify',
+        'expire' => 5,
     ],
 
     /*
@@ -32,9 +32,9 @@ return [
     | The name of the home route to redirect to after login
     |
     */
-    "routes" => [
-        "flag" => false,
+    'routes' => [
+        'flag' => false,
 
-        "home" => "home",
+        'home' => 'home',
     ],
 ];

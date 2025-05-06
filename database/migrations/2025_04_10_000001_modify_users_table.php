@@ -8,34 +8,36 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table("users", function (Blueprint $table) {
-            if (! Schema::hasColumn("users", "email")) {
-                $table->string("email")->unique();
+        Schema::table('users', function (Blueprint $table) {
+            if (! Schema::hasColumn('users', 'email')) {
+                $table->addColumn('string', 'email')->unique();
             }
 
-            if (! Schema::hasColumn("users", "email_verified_at")) {
-                $table->timestamp("email_verified_at")->nullable();
+            if (! Schema::hasColumn('users', 'email_verified_at')) {
+                $table->addColumn('timestamp', 'email_verified_at')->nullable();
             }
 
-            if (Schema::hasColumn("users", "password")) {
-                $table->string("password")->nullable()->change();
+            if (! Schema::hasColumn('users', 'password')) {
+                $table->addColumn('string', 'password')->nullable();
+            } else {
+                $table->string('password')->nullable()->change();
             }
         });
     }
 
     public function down(): void
     {
-        Schema::table("users", function (Blueprint $table) {
-            if (Schema::hasColumn("users", "email")) {
-                $table->dropColumn("email");
+        Schema::table('users', function (Blueprint $table) {
+            if (Schema::hasColumn('users', 'email')) {
+                $table->dropColumn('email');
             }
 
-            if (Schema::hasColumn("users", "email_verified_at")) {
-                $table->dropColumn("email_verified_at");
+            if (Schema::hasColumn('users', 'email_verified_at')) {
+                $table->dropColumn('email_verified_at');
             }
 
-            if (Schema::hasColumn("users", "password")) {
-                $table->string("password")->nullable(false)->change();
+            if (Schema::hasColumn('users', 'password')) {
+                $table->string('password')->nullable(false)->change();
             }
         });
     }

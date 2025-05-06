@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class LoginUrlGenerationTest extends TestCase
 {
-    public function test_login_url_is_generated_and_works()
+    public function test_login_url_is_generated_and_works(): void
     {
         $url = PasswordlessLogin::forUser($this->user)->generate();
 
@@ -17,19 +17,19 @@ class LoginUrlGenerationTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_no_user_provided_fails()
+    public function test_no_user_provided_fails(): void
     {
         $this->assertThrows(
-            fn() => PasswordlessLogin::generate(),
+            fn () => PasswordlessLogin::generate(),
             \Exception::class,
             __('passwordless::app.login.notification.no-user')
         );
     }
 
-    public function test_non_existing_user_fails()
+    public function test_non_existing_user_fails(): void
     {
         $this->assertThrows(
-            fn() => PasswordlessLogin::forUser(1000)->generate(),
+            fn () => PasswordlessLogin::forUser(1000)->generate(),
             ModelNotFoundException::class,
             __('passwordless::app.login.notification.user-not-found')
         );

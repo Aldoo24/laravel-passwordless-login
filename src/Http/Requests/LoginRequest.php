@@ -14,8 +14,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "email" => "required|email|max:255|exists:users",
-            "remember_me" => "nullable"
+            'email' => 'required|email|max:255|exists:users',
+            'remember_me' => 'nullable',
         ];
     }
 }

@@ -8,6 +8,6 @@ abstract class Controller
 
     public function __construct()
     {
-        $this->userModel = config("passwordless.model.namespace", "\App\Models\User");
+        $this->userModel = config()->string('passwordless.model.namespace', '\App\Models\User');
     }
 }

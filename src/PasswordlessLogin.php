@@ -9,22 +9,21 @@ use Illuminate\Support\Facades\URL;
 class PasswordlessLogin
 {
     private string $userModel;
-    private $user;
+    private object $user;
     private int $rememberMe = 0;
 
     public function __construct()
     {
-        $this->userModel = config("passwordless.model.namespace");
+        $this->userModel = config()->string('passwordless.model.namespace', '\App\Models\User');
     }
 
-    public function forUser(mixed $user): self
+    public function forUser(object|string|int $user): self
     {
         match (true) {
-            $user instanceof Authenticatable => $this->user = $user,
-            is_a($user, $this->userModel, true) => $this->user = $user,
-            is_string($user) && ($foundUser = $this->userModel::where("email", $user)->first()) => $this->user = $foundUser,
-            is_int($user) && ($foundUser = $this->userModel::find($user)?->first()) => $this->user = $foundUser,
-            default => throw new ModelNotFoundException(__("passwordless::app.login.notification.user-not-found")),
+            $user instanceof Authenticatable, is_a($user, $this->userModel, true) => $this->user = $user,
+            is_string($user) && ($foundUser = $this->findByEmail($user)) => $this->user = $foundUser,
+            is_int($user) && ($foundUser = $this->findById($user)) => $this->user = $foundUser,
+            default => throw new ModelNotFoundException(__('passwordless::app.login.notification.user-not-found')),
         };
 
         return $this;
@@ -40,16 +39,26 @@ class PasswordlessLogin
     public function generate(): string
     {
         if (empty($this->user)) {
-            throw new \Exception(__("passwordless::app.login.notification.no-user"));
+            throw new \Exception(__('passwordless::app.login.notification.no-user'));
         }
 
         return URL::temporarySignedRoute(
             name: config('passwordless.url.route'),
-            expiration: now()->addMinutes((int) config("passwordless.url.expire", 5)),
+            expiration: now()->addMinutes(config()->integer('passwordless.url.expire', 5)),
             parameters: [
-                "email" => $this->user->email,
-                "remember" => $this->rememberMe,
+                'email' => $this->user->email,
+                'remember' => $this->rememberMe,
             ],
         );
+    }
+
+    private function findByEmail(string $email)
+    {
+        return app($this->userModel)::where('email', $email)->first();
+    }
+
+    private function findById(int $id)
+    {
+        return app($this->userModel)::find($id)?->first();
     }
 }
